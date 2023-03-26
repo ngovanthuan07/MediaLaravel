@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\HeartController;
+use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Api\PostPicAndVideoController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +21,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/updateProfile', [UserController::class, 'updateProfile']);
+    Route::post('/createPost/home', [PostPicAndVideoController::class, 'home']);
+    Route::get('/display-user-posts', [PostPicAndVideoController::class, 'display_user_posts']);
+
+    Route::get('/messages/{id}', [MessageController::class, 'showMessages']);
+    Route::post('/messages/add', [MessageController::class, 'addMessage']);
+
+
+    Route::post('/like', [HeartController::class, 'like']);
+    Route::get('/count-like-post', [HeartController::class, 'count']);
     Route::get('/me', [AuthController::class, 'me']);
+
 });
 
 
