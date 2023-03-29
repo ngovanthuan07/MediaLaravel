@@ -23,7 +23,11 @@ return new class extends Migration
             $table->integer('dangerous_goods')->nullable();
             $table->string('currency')->nullable();
             $table->double('pricing')->nullable();
+            $table->double('discount')->nullable();
+            $table->integer('quantity')->nullable();
             $table->double('stock')->nullable();
+            $table->integer('views')->nullable();
+            $table->string('choose')->nullable()->default('PICTURE_VIDEO');
             $table->string('deleted')->nullable();
             //users
             $table->unsignedBigInteger('user_id');
