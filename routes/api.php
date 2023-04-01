@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\HeartController;
 use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\PostPicAndVideoController;
@@ -24,9 +25,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/updateProfile', [UserController::class, 'updateProfile']);
     Route::post('/createPost/home', [PostPicAndVideoController::class, 'home']);
     Route::get('/display-user-posts', [PostPicAndVideoController::class, 'display_user_posts']);
+    Route::get('/searchPosts/{searchable}', [PostPicAndVideoController::class, 'search']);
+    Route::get('/addToCart', [CartController::class, 'cart']);
+    Route::post('/deleteAllItemCart', [CartController::class, 'deleteAllItemCartDetail']);
 
     Route::get('/messages/{id}', [MessageController::class, 'showMessages']);
     Route::post('/messages/add', [MessageController::class, 'addMessage']);
+
+
+    // product
+    Route::post('/addProduct', [PostPicAndVideoController::class, 'addProduct']);
 
 
     Route::post('/like', [HeartController::class, 'like']);

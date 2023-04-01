@@ -21,6 +21,10 @@ class Post extends Model
         'currency',
         'pricing',
         'stock',
+        'discount',
+        'quantity',
+        'views',
+        'choose',
         'deleted',
         'user_id'
     ];
@@ -39,5 +43,9 @@ class Post extends Model
 
     public function messages() {
         return $this->hasMany(Message::class);
+    }
+
+    public function cart_details() {
+        return $this->hasMany(CartDetail::class);
     }
 }
