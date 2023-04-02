@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Auth;
 
 class PostPicAndVideoController extends Controller
 {
+    public function getPostById(Request $request) {
+        $post = Post::query()->where('id', $request['id'])->first();
+        $post['assets'] = $post->assets && [];
+
+        return response()->json([
+            'post' => $post,
+            'success' => true
+        ]);
+    }
+
     public function home(Request $request) {
         $post = new Post;
         $post->fill($request->only(['name', 'category', 'watch']));

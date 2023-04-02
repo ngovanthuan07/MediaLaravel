@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\CartDetailController;
 use App\Http\Controllers\Api\HeartController;
 use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\PostPicAndVideoController;
@@ -25,9 +26,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/updateProfile', [UserController::class, 'updateProfile']);
     Route::post('/createPost/home', [PostPicAndVideoController::class, 'home']);
     Route::get('/display-user-posts', [PostPicAndVideoController::class, 'display_user_posts']);
+    Route::get('/post/{id}', [PostPicAndVideoController::class, 'getPostById']);
+
     Route::get('/searchPosts/{searchable}', [PostPicAndVideoController::class, 'search']);
     Route::get('/addToCart', [CartController::class, 'cart']);
     Route::post('/deleteAllItemCart', [CartController::class, 'deleteAllItemCartDetail']);
+    Route::get('/showCartDetail', [CartDetailController::class, 'showAllCartDetail']);
+    Route::post('/removeCartDetail', [CartDetailController::class, 'removeCartDetail']);
 
     Route::get('/messages/{id}', [MessageController::class, 'showMessages']);
     Route::post('/messages/add', [MessageController::class, 'addMessage']);

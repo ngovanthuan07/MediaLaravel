@@ -66,14 +66,14 @@ class CartController extends Controller
             ->first();
         $post = Post::query()->where('id', $postId)->first();
 
-        if ($cartDetail->quantity + $quantity >= $post['quantity']) {
+        if ($cartDetail->quantity + $quantity > $post['quantity']) {
             return response()->json([
                 'message' => 'The quantity of products in the cart has exceeded the available quantity in stock',
                 'status' => false
             ], 200);
         }
 
-        if($quantity == 0) {
+        if($cartDetail->quantity + $quantity < 1) {
             $cartDetail->delete();
             return response()->json([
                 'message' => 'Oke',
