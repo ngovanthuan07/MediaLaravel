@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('sellers', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('category')->nullable();
-            $table->string('description')->nullable();
-            $table->string('watch')->nullable();
-            $table->integer('views')->nullable();
-            $table->string('choose')->nullable();
-            $table->string('deleted')->nullable();
+            $table->longText("address")->nullable();
+            $table->string("email")->nullable();
+            $table->string("bank_account_holder_name")->nullable();
+            $table->string("bank_account_number")->nullable();
+            $table->string("bank_identifier_code")->nullable();
+            $table->string("bank_location")->nullable();
+            $table->string("bank_currency")->nullable();
             //users
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
@@ -32,9 +32,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('sellers', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
         });
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('sellers');
     }
 };

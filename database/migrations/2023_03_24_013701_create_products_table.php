@@ -11,14 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->string('category')->nullable();
+            $table->string('image')->nullable();
             $table->string('description')->nullable();
-            $table->string('watch')->nullable();
-            $table->integer('views')->nullable();
+            $table->boolean('public_searchable')->nullable();
+            $table->boolean('show_product_in_live')->nullable();
+            $table->boolean('dangerous_goods')->nullable();
+            $table->string('currency')->nullable();
+            $table->double('pricing')->nullable();
+            $table->double('discount')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->double('stock')->nullable();
             $table->string('choose')->nullable();
+            $table->integer('views')->nullable();
             $table->string('deleted')->nullable();
             //users
             $table->unsignedBigInteger('user_id');
@@ -32,9 +40,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
         });
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('products');
     }
 };

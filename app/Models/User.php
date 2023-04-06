@@ -52,6 +52,14 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function sellers() {
+        return $this->hasMany(Seller::class);
+    }
+
+    public function products() {
+        return $this->hasMany(Product::class);
+    }
+
     public function hearts() {
         return $this->hasMany(Heart::class);
     }
@@ -62,5 +70,9 @@ class User extends Authenticatable
 
     public function carts() {
         return $this->hasMany(Cart::class);
+    }
+
+    public function room_details() {
+        return $this->hasMany(RoomDetail::class);
     }
 }

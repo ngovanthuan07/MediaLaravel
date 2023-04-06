@@ -25,6 +25,7 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password'])
         ]);
+        $user["seller"] = $user->sellers();
         $token = $user->createToken('main')->plainTextToken;
         return response([
             'user' => $user,
@@ -44,6 +45,7 @@ class AuthController extends Controller
             ], 422);
         }
         $user = Auth::user();
+        $user["seller"] = $user->sellers();
         $token = $user->createToken('main')->plainTextToken;
 
         return response([
@@ -76,6 +78,7 @@ class AuthController extends Controller
         try {
             // Xử lý logic của bạn ở đây
             $user = Auth::user();
+            $user["seller"] = $user->sellers() ?? null;
             return response(
                 [
                     'user' => $user,
@@ -90,12 +93,5 @@ class AuthController extends Controller
             ], 401);
         }
     }
-
-    public function test() {
-        return response()->json([
-            'Oke'=> 'oke'
-        ]);
-    }
-
 
 }

@@ -22,11 +22,11 @@ return new class extends Migration
                 ->on('carts')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            //posts
-            $table->unsignedBigInteger('post_id');
-            $table->foreign('post_id')
+            //products
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')
                 ->references('id')
-                ->on('posts')
+                ->on('products')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->timestamps();
@@ -40,7 +40,7 @@ return new class extends Migration
     {
         Schema::table('carts_details', function (Blueprint $table) {
             $table->dropForeign(['cart_id']);
-            $table->dropForeign(['post_id']);
+            $table->dropForeign(['product_id']);
         });
         Schema::dropIfExists('carts_details');
     }

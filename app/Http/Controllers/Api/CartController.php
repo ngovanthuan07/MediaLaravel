@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartDetail;
 use App\Models\Post;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +23,7 @@ class CartController extends Controller
 
     }
     public function cart(Request $request) {
-        $postId = $request->input('post_id');
+        $productId = $request->input('product_id');
         $userId = Auth::user()->id;
         $quantity= $request->input('quantity');
 
@@ -46,27 +47,27 @@ class CartController extends Controller
         // kiem tra product co trong gio hang khong neu khong co thi tao
         $checkCartDetail = CartDetail::query()
             ->join('carts', 'carts_details.cart_id', '=', 'carts.id')
-            ->join('posts', 'carts_details.post_id', '=', 'posts.id')
+            ->join('products', 'carts_details.product_id', '=', 'products.id')
             ->where('cart_id', $cart->id)
-            ->where('post_id', $postId)
+            ->where('product_id', $productId)
             ->exists();
 
         if(!$checkCartDetail) {
             CartDetail::create([
                 'cart_id' => $cart->id,
-                'post_id' => $postId,
+                'product_id' => $productId,
                 'quantity' => 0,
                 'total' => 0
-            ])->save();
+            ]);
         }
 
         $cartDetail = CartDetail::query()
             ->where('cart_id', $cart->id)
-            ->where('post_id', $postId)
+            ->where('product_id', $productId)
             ->first();
-        $post = Post::query()->where('id', $postId)->first();
+        $product = Product::query()->where('id', $productId)->first();
 
-        if ($cartDetail->quantity + $quantity > $post['quantity']) {
+        if ($cartDetail->quantity + $quantity > $product['quantity']) {
             return response()->json([
                 'message' => 'The quantity of products in the cart has exceeded the available quantity in stock',
                 'status' => false
@@ -83,7 +84,7 @@ class CartController extends Controller
 
         $cartDetail->update([
             'quantity' => $cartDetail->quantity + $quantity,
-            'total' => ($cartDetail->quantity + $quantity) * $post['pricing']
+            'total' => ($cartDetail->quantity + $quantity) * $product['pricing']
         ]);
         return response()->json([
             'message' => 'Oke',

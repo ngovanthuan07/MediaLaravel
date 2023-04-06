@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartDetail;
 use App\Models\Post;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,9 +26,8 @@ class CartDetailController extends Controller
                 ->get();
 
             foreach($cardDetails as $cardDetail) {
-                $post = Post::query()->where('id', $cardDetail['post_id'])->first();
-                $post['assets'] = $post->assets && [];
-                $cardDetail['post'] = $post;
+                $product = Product::query()->where('id', $cardDetail['product_id'])->first();
+                $cardDetail['product'] = $product;
             }
 
 

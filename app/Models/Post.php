@@ -14,19 +14,10 @@ class Post extends Model
         'category',
         'description',
         'watch',
-        'options',
-        'public_searchable',
-        'show_product_in_live',
-        'dangerous_goods',
-        'currency',
-        'pricing',
-        'stock',
-        'discount',
-        'quantity',
         'views',
         'choose',
         'deleted',
-        'user_id'
+        'user_id',
     ];
 
     public function user() {
@@ -45,7 +36,7 @@ class Post extends Model
         return $this->hasMany(Message::class);
     }
 
-    public function cart_details() {
-        return $this->hasMany(CartDetail::class);
+    public function room_details() {
+        return $this->hasMany(RoomDetail::class);
     }
 }

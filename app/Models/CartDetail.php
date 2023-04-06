@@ -13,7 +13,7 @@ class CartDetail extends Model
         'total',
         'quantity',
         'cart_id',
-        'post_id'
+        'product_id'
     ];
 
     protected $table = 'carts_details';
@@ -22,7 +22,7 @@ class CartDetail extends Model
     public function cart() {
         return $this->belongsTo(Cart::class);
     }
-    public function post() {
-        return $this->belongsTo(Post::class);
+    public function product() {
+        return $this->belongsTo(Product::class);
     }
 }
