@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CartDetailController;
 use App\Http\Controllers\Api\HeartController;
 use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\PostPicAndVideoController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\RoomController;
@@ -70,8 +71,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/searchUserByField', [UserController::class, 'search']);
     Route::get('/searchable/{searchable}', [PostPicAndVideoController::class, 'search']);
 
+    // payment
+    Route::post('/payment', [PaymentController::class, 'payment']);
+    Route::post('/payment-success', [PaymentController::class, 'success']);
 });
 
 // login and register
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);
+
