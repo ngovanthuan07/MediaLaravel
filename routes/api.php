@@ -74,6 +74,10 @@ Route::middleware('auth:sanctum')->group(function () {
     // payment
     Route::post('/payment', [PaymentController::class, 'payment']);
     Route::post('/payment-success', [PaymentController::class, 'success']);
+
+    // seller
+    Route::post('/signUpSeller', [UserController::class, 'signUpSeller']);
+
 });
 
 // login and register

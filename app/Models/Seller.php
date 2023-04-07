@@ -17,6 +17,7 @@ class Seller extends Model
         'bank_identifier_code',
         'bank_location',
         'bank_currency',
+        'user_id'
     ];
 
     public function user() {

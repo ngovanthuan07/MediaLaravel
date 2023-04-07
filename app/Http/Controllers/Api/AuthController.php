@@ -78,7 +78,7 @@ class AuthController extends Controller
         try {
             // Xử lý logic của bạn ở đây
             $user = Auth::user();
-            $user["seller"] = $user->sellers() ?? null;
+            $user["seller"] = $user->sellers ?? null;
             return response(
                 [
                     'user' => $user,
